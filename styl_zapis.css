@@ -22,7 +22,6 @@
       overflow:hidden;
     }
 
-    /* subtle moving shine */
     .shine{
       position:absolute;
       inset:-40%;
@@ -158,7 +157,6 @@
       box-shadow: 0 0 26px rgba(124,243,255,.10);
     }
 
-    /* --- Waves (3 SVG layers) --- */
     .waves{
       position:absolute;
       left:0; right:0; bottom:-1px;
@@ -194,7 +192,6 @@
       to{ transform: translateX(-12%); }
     }
 
-    /* Glow line near horizon */
     .horizon{
       position:absolute;
       left:0; right:0;
@@ -206,7 +203,6 @@
       z-index:1;
     }
 
-    /* small floating particles */
     .bubbles{
       position:absolute;
       inset:0;
