@@ -17,14 +17,12 @@ body{
   color: var(--white);
   overflow-x:hidden;
 
-  /* animated ocean gradient */
   background: linear-gradient(120deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
   background-size: 400% 400%;
   animation: oceanShift 10s ease-in-out infinite;
   position: relative;
 }
 
-/* underwater light (moving) */
 body::before{
   content:"";
   position: fixed;
@@ -48,7 +46,6 @@ body::before{
   animation: lightSweep 9s linear infinite;
 }
 
-/* waves + particles layer (CSS-only) */
 body::after{
   content:"";
   position: fixed;
@@ -60,7 +57,6 @@ body::after{
   pointer-events:none;
   z-index:1;
 
-  /* 1) particles  2) far wave  3) near wave */
   background:
     radial-gradient(circle at 10% 70%, rgba(124,243,255,.18) 0 2px, transparent 3px),
     radial-gradient(circle at 25% 85%, rgba(124,243,255,.12) 0 2px, transparent 3px),
@@ -68,14 +64,12 @@ body::after{
     radial-gradient(circle at 65% 90%, rgba(124,243,255,.12) 0 2px, transparent 3px),
     radial-gradient(circle at 85% 75%, rgba(124,243,255,.16) 0 2px, transparent 3px),
 
-    /* far wave */
     radial-gradient(120px 40px at 10% 80%, rgba(124,243,255,.12) 40%, transparent 41%) ,
     radial-gradient(120px 40px at 30% 82%, rgba(124,243,255,.12) 40%, transparent 41%) ,
     radial-gradient(120px 40px at 50% 80%, rgba(124,243,255,.12) 40%, transparent 41%) ,
     radial-gradient(120px 40px at 70% 82%, rgba(124,243,255,.12) 40%, transparent 41%) ,
     radial-gradient(120px 40px at 90% 80%, rgba(124,243,255,.12) 40%, transparent 41%) ,
 
-    /* near wave */
     radial-gradient(220px 70px at 15% 92%, rgba(0,200,255,.22) 40%, transparent 41%) ,
     radial-gradient(220px 70px at 45% 94%, rgba(0,200,255,.22) 40%, transparent 41%) ,
     radial-gradient(220px 70px at 75% 92%, rgba(0,200,255,.22) 40%, transparent 41%);
@@ -89,7 +83,6 @@ body::after{
   filter: blur(0px);
   opacity: 0.9;
 
-  /* parallax-ish motion */
   animation: wavesMove 7.5s linear infinite;
 }
 
@@ -114,11 +107,10 @@ body::after{
   }
 }
 
-/* ===== FORM CARD ===== */
 
 .wrap{
   position: relative;
-  z-index:2; /* above waves */
+  z-index:2; 
   max-width: 560px;
   width: min(92vw, 560px);
   margin: 44px auto;
@@ -133,7 +125,6 @@ body::after{
     0 22px 65px rgba(0,0,0,.55),
     inset 0 0 0 1px rgba(255,255,255,.04);
 
-  /* floating action */
   animation: floatCard 3.6s ease-in-out infinite;
 }
 
@@ -153,7 +144,6 @@ h1{
     0 0 42px rgba(122,167,255,.14);
 }
 
-/* ===== FORM ===== */
 
 form{ display:grid; gap:14px; }
 
@@ -198,7 +188,6 @@ form{ display:grid; gap:14px; }
   accent-color: #2e8b57;
 }
 
-/* ===== PROGRESS (requirements kept) ===== */
 
 .progress{
   width:100%;
@@ -220,12 +209,10 @@ form{ display:grid; gap:14px; }
   align-items:center;
   justify-content:center;
 
-  /* more action */
   transition: width .35s cubic-bezier(.2,.9,.2,1);
   box-shadow: 0 0 18px rgba(46,139,87,.25);
 }
 
-/* ===== BUTTON ===== */
 
 button{
   padding: 12px 14px;
@@ -254,9 +241,7 @@ button:disabled{
   filter: grayscale(.1);
   box-shadow:none;
 }
-/* ===== EXTRA ACTION: WATER IN PROGRESS BAR ===== */
 
-/* water texture moving inside the green bar */
 .progress__bar{
   position: relative;
   overflow: hidden;
@@ -302,14 +287,12 @@ button:disabled{
   100%{ transform: translateX(220%); }
 }
 
-/* ===== EXTRA ACTION: BUTTON RIPPLE ===== */
 
 button{
   position: relative;
   overflow: hidden;
 }
 
-/* ripple circle */
 button .ripple{
   position:absolute;
   border-radius:50%;
@@ -326,7 +309,6 @@ button .ripple{
   }
 }
 
-/* ===== EXTRA ACTION: MORE BUBBLES NEAR BOTTOM ===== */
 body::after{
   filter: saturate(1.15);
 }
@@ -335,7 +317,6 @@ body::after{
   box-shadow: 0 0 18px rgba(124,243,255,.25);
 }
 
-/* FIX SELECT OPTIONS VISIBILITY */
 
 select {
   color: white;
@@ -343,6 +324,6 @@ select {
 }
 
 select option {
-  color: black;      /* текст options */
-  background: white; /* фон списка */
+  color: black;    
+  background: white; 
 }
