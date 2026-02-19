@@ -44,7 +44,6 @@ fields.forEach((el) => {
 updateProgress();
 
 
-// RIPPLE EFFECT on button click
 btn.addEventListener("click", function(e){
   const circle = document.createElement("span");
   circle.classList.add("ripple");
