@@ -1,0 +1,348 @@
+:root{
+  --bg1:#021428;
+  --bg2:#063a6b;
+  --bg3:#021b33;
+  --accent:#7cf3ff;
+  --accent2:#7aa7ff;
+  --white:#eaf7ff;
+}
+
+*{ box-sizing:border-box; }
+
+html, body{ height:100%; }
+
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  color: var(--white);
+  overflow-x:hidden;
+
+  /* animated ocean gradient */
+  background: linear-gradient(120deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
+  background-size: 400% 400%;
+  animation: oceanShift 10s ease-in-out infinite;
+  position: relative;
+}
+
+/* underwater light (moving) */
+body::before{
+  content:"";
+  position: fixed;
+  inset:-35%;
+  pointer-events:none;
+  z-index:0;
+
+  background:
+    radial-gradient(700px 350px at 20% 20%, rgba(124,243,255,.18), transparent 60%),
+    radial-gradient(700px 350px at 80% 25%, rgba(122,167,255,.18), transparent 60%),
+    linear-gradient(110deg,
+      transparent 35%,
+      rgba(124,243,255,.10) 45%,
+      rgba(255,255,255,.06) 50%,
+      rgba(122,167,255,.10) 55%,
+      transparent 65%
+    );
+
+  filter: blur(2px);
+  transform: rotate(10deg);
+  animation: lightSweep 9s linear infinite;
+}
+
+/* waves + particles layer (CSS-only) */
+body::after{
+  content:"";
+  position: fixed;
+  left:-20%;
+  right:-20%;
+  bottom:-8px;
+  height: 48vh;
+  min-height: 260px;
+  pointer-events:none;
+  z-index:1;
+
+  /* 1) particles  2) far wave  3) near wave */
+  background:
+    radial-gradient(circle at 10% 70%, rgba(124,243,255,.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 25% 85%, rgba(124,243,255,.12) 0 2px, transparent 3px),
+    radial-gradient(circle at 45% 78%, rgba(124,243,255,.14) 0 2px, transparent 3px),
+    radial-gradient(circle at 65% 90%, rgba(124,243,255,.12) 0 2px, transparent 3px),
+    radial-gradient(circle at 85% 75%, rgba(124,243,255,.16) 0 2px, transparent 3px),
+
+    /* far wave */
+    radial-gradient(120px 40px at 10% 80%, rgba(124,243,255,.12) 40%, transparent 41%) ,
+    radial-gradient(120px 40px at 30% 82%, rgba(124,243,255,.12) 40%, transparent 41%) ,
+    radial-gradient(120px 40px at 50% 80%, rgba(124,243,255,.12) 40%, transparent 41%) ,
+    radial-gradient(120px 40px at 70% 82%, rgba(124,243,255,.12) 40%, transparent 41%) ,
+    radial-gradient(120px 40px at 90% 80%, rgba(124,243,255,.12) 40%, transparent 41%) ,
+
+    /* near wave */
+    radial-gradient(220px 70px at 15% 92%, rgba(0,200,255,.22) 40%, transparent 41%) ,
+    radial-gradient(220px 70px at 45% 94%, rgba(0,200,255,.22) 40%, transparent 41%) ,
+    radial-gradient(220px 70px at 75% 92%, rgba(0,200,255,.22) 40%, transparent 41%);
+
+  background-repeat: repeat;
+  background-size:
+    300px 220px, 320px 240px, 340px 230px, 360px 250px, 380px 240px,
+    420px 220px, 420px 220px, 420px 220px, 420px 220px, 420px 220px,
+    520px 260px, 520px 260px, 520px 260px;
+
+  filter: blur(0px);
+  opacity: 0.9;
+
+  /* parallax-ish motion */
+  animation: wavesMove 7.5s linear infinite;
+}
+
+@keyframes oceanShift{
+  0%{ background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+
+@keyframes lightSweep{
+  from{ transform: translateX(-10%) rotate(10deg); }
+  to{ transform: translateX(10%) rotate(10deg); }
+}
+
+@keyframes wavesMove{
+  from{ background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0,0 0,0 0,0 0,0 0, 0 0,0 0,0 0; }
+  to{
+    background-position:
+      120px -40px, 160px -60px, 200px -50px, 240px -70px, 280px -60px,
+      -220px 0, -120px 0, -20px 0, 80px 0, 180px 0,
+      -360px 0, -180px 0, 0 0;
+  }
+}
+
+/* ===== FORM CARD ===== */
+
+.wrap{
+  position: relative;
+  z-index:2; /* above waves */
+  max-width: 560px;
+  width: min(92vw, 560px);
+  margin: 44px auto;
+  padding: 26px;
+  border-radius: 18px;
+
+  background: rgba(8, 26, 52, .55);
+  border: 1px solid rgba(124,243,255,.20);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 22px 65px rgba(0,0,0,.55),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+
+  /* floating action */
+  animation: floatCard 3.6s ease-in-out infinite;
+}
+
+@keyframes floatCard{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-7px); }
+}
+
+h1{
+  margin: 6px 0 18px;
+  text-align:center;
+  font-size: 30px;
+  letter-spacing: -0.4px;
+
+  text-shadow:
+    0 0 16px rgba(124,243,255,.24),
+    0 0 42px rgba(122,167,255,.14);
+}
+
+/* ===== FORM ===== */
+
+form{ display:grid; gap:14px; }
+
+.field label{
+  display:block;
+  margin-bottom:6px;
+  opacity:.95;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field select{
+  width:100%;
+  padding:11px 12px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.16);
+
+  background: rgba(255,255,255,.07);
+  color: var(--white);
+  outline:none;
+
+  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color: rgba(124,243,255,.45);
+  box-shadow: 0 0 0 4px rgba(124,243,255,.12), 0 0 18px rgba(124,243,255,.14);
+  transform: translateY(-1px);
+}
+
+.field.checkbox label{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.field.checkbox input{
+  width:18px;
+  height:18px;
+  accent-color: #2e8b57;
+}
+
+/* ===== PROGRESS (requirements kept) ===== */
+
+.progress{
+  width:100%;
+  height:25px;
+  background:#dcdcdc;
+  border-radius:999px;
+  overflow:hidden;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.18);
+}
+
+.progress__bar{
+  height:100%;
+  width:0%;
+  background:#2e8b57;
+  color:#fff;
+  font-weight:700;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  /* more action */
+  transition: width .35s cubic-bezier(.2,.9,.2,1);
+  box-shadow: 0 0 18px rgba(46,139,87,.25);
+}
+
+/* ===== BUTTON ===== */
+
+button{
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(124,243,255,.26);
+
+  background: linear-gradient(90deg, rgba(124,243,255,.18), rgba(122,167,255,.16));
+  color: var(--white);
+
+  font-size: 16px;
+  cursor:pointer;
+
+  box-shadow: 0 0 28px rgba(124,243,255,.10);
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+}
+
+button:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 0 36px rgba(124,243,255,.16);
+}
+
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  filter: grayscale(.1);
+  box-shadow:none;
+}
+/* ===== EXTRA ACTION: WATER IN PROGRESS BAR ===== */
+
+/* water texture moving inside the green bar */
+.progress__bar{
+  position: relative;
+  overflow: hidden;
+}
+
+.progress__bar::before{
+  content:"";
+  position:absolute;
+  inset:-30px -60px;
+  background:
+    radial-gradient(30px 14px at 10% 60%, rgba(255,255,255,.20) 40%, transparent 41%),
+    radial-gradient(34px 16px at 30% 70%, rgba(255,255,255,.18) 40%, transparent 41%),
+    radial-gradient(28px 12px at 55% 55%, rgba(255,255,255,.18) 40%, transparent 41%),
+    radial-gradient(34px 16px at 75% 68%, rgba(255,255,255,.16) 40%, transparent 41%),
+    radial-gradient(30px 14px at 92% 58%, rgba(255,255,255,.18) 40%, transparent 41%);
+  opacity:.55;
+  animation: waterMove 1.8s linear infinite;
+  pointer-events:none;
+  mix-blend-mode: screen;
+}
+
+.progress__bar::after{
+  content:"";
+  position:absolute;
+  left:-30%;
+  top:0;
+  width:60%;
+  height:100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  animation: waterShine 2.6s ease-in-out infinite;
+  pointer-events:none;
+  opacity:.5;
+}
+
+@keyframes waterMove{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(60px); }
+}
+
+@keyframes waterShine{
+  0%{ transform: translateX(-120%); }
+  55%{ transform: translateX(220%); }
+  100%{ transform: translateX(220%); }
+}
+
+/* ===== EXTRA ACTION: BUTTON RIPPLE ===== */
+
+button{
+  position: relative;
+  overflow: hidden;
+}
+
+/* ripple circle */
+button .ripple{
+  position:absolute;
+  border-radius:50%;
+  transform: scale(0);
+  animation: ripple 600ms ease-out;
+  background: rgba(124,243,255,.35);
+  pointer-events:none;
+}
+
+@keyframes ripple{
+  to{
+    transform: scale(8);
+    opacity:0;
+  }
+}
+
+/* ===== EXTRA ACTION: MORE BUBBLES NEAR BOTTOM ===== */
+body::after{
+  filter: saturate(1.15);
+}
+
+.bubbles span{
+  box-shadow: 0 0 18px rgba(124,243,255,.25);
+}
+
+/* FIX SELECT OPTIONS VISIBILITY */
+
+select {
+  color: white;
+  background: rgba(255,255,255,.08);
+}
+
+select option {
+  color: black;      /* текст options */
+  background: white; /* фон списка */
+}
