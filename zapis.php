@@ -17,7 +17,7 @@ if ($imie != "" && $poziom != "") {
     $ok = true;
 }
 
-// zabezpieczenie danych (proste)
+// zabezpieczenie danych  (Cross-Site Scripting)
 $imie = htmlspecialchars($imie);
 $poziom = htmlspecialchars($poziom);
 
